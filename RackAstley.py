@@ -26,9 +26,11 @@ def render_device(name, size):
     bottom = f"└{'─' * inner_width}┘"
 
     if size == 1:
-        eq_count = (inner_width - len(name) - len(size_str)) // 2
+        name = name.strip()
+        total_len = inner_width
+        eq_count = (total_len - len(name) - len(size_str) - 1) // 2  # -1 for '═'
         left_eq = eq_count
-        right_eq = inner_width - len(name) - len(size_str) - left_eq
+        right_eq = total_len - len(name) - len(size_str) - 1 - left_eq
         line = (
             "〘"
             + "=" * left_eq
@@ -39,6 +41,7 @@ def render_device(name, size):
             + "〙"
         )
         return line
+
     elif size == 2:
         return f"{top}\n{bottom}"
     else:
@@ -72,9 +75,6 @@ def validate_rack(rack):
 def render_rack_from_yaml(rack):
     height = rack['height']
     title = rack.get('name', 'Unnamed')
-    lines = ["" for _ in range(height)]
-
-    # Fill lines top-down
     fill = [''] * height
     for dev in rack['devices']:
         name = dev['name']
@@ -90,7 +90,11 @@ def render_rack_from_yaml(rack):
     for i in range(height):
         u = height - i
         line = fill[i] or ""
-        out.append(f"[{u:02d}] {line}")
+        # No space after rack number if single-U device line (with '〘')
+        if line and "〘" in line:
+            out.append(f"[{u:02d}]{line}")
+        else:
+            out.append(f"[{u:02d}] {line}")
     return "\n".join(out)
 
 def main():
@@ -131,7 +135,7 @@ def main():
             except Exception as e:
                 print(f"\n❗ Error: {e}")
 
-        elif choice in ("3", "q"):
+        elif choice in ("q",):
             break
         else:
             print("❗Invalid choice. Try again.")
