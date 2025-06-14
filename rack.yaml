@@ -1,0 +1,20 @@
+rack:
+  name: Rack1
+  height: 24
+  devices:
+    - name: UPS
+      position: 1
+      size: 2
+    - name: Firewall
+      position: 3
+      size: 1
+    - name: WebServer01
+      position: 4
+      size: 1
+    - name: WebServer02
+      position: 5
+      size: 1
+    - name: Switch
+      position: 6
+      size: 2
+
