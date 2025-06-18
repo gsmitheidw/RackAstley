@@ -1,10 +1,18 @@
 # RackAstley
-Draw Server Room/Data Centre Racks diagrams in plain text from yaml or user input
+Draw Server Room/Data Centre Racks diagrams in plain text from yaml or user input. Rack diagram automatically copied to clipboard.
+
+*Plain text rack diagrams. Never gonna give them up!*
 
 ## Instructions
 
 1. clone repo
-2. pip install -r requirements.txt (probably best in a venv)
+2. pip install -r requirements.txt (probably best in a venv) eg:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
 3. (optional) create a rack layout yaml using template example
 4. run python3 RackAstley.py
 
@@ -13,7 +21,7 @@ Draw Server Room/Data Centre Racks diagrams in plain text from yaml or user inpu
 
 Rack items can be printed to clipboard/screen individually or you can define a rack in yaml.
 
-For yaml import, a sample is provided. Each rack item has a name, a position (the U value it starts at)
+For yaml import, a sample is provided. Each rack item has a name, a position (the U value that device starts at)
 and the height of that item. Gaps can be left for unfilled rack positions. Also there's a name for the 
 rack and height in U of the whole rack (usually 42).  
 
